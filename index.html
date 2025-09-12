@@ -141,7 +141,7 @@
     <!-- Testimonials Section -->
     <section class="testimonials">
         <div class="container">
-            <div class="section-title">
+            <div class="testimonial-title">
                 <h2>What Our Clients Say</h2>
                 <p>Don't just take our word for it - hear from some of our satisfied customers</p>
             </div>
@@ -226,60 +226,6 @@
     </footer>
 
     <script>
-        // Carousel functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const carousel = document.querySelector('.carousel');
-            const items = document.querySelectorAll('.carousel-item');
-            const prevBtn = document.querySelector('.carousel-control.prev');
-            const nextBtn = document.querySelector('.carousel-control.next');
-            const indicatorsContainer = document.querySelector('.carousel-indicators');
-            
-            let currentIndex = 0;
-            const totalItems = items.length;
-            
-            // Create indicators
-            for (let i = 0; i < totalItems; i++) {
-                const indicator = document.createElement('div');
-                indicator.classList.add('carousel-indicator');
-                if (i === 0) indicator.classList.add('active');
-                indicator.addEventListener('click', () => {
-                    goToSlide(i);
-                });
-                indicatorsContainer.appendChild(indicator);
-            }
-            
-            const indicators = document.querySelectorAll('.carousel-indicator');
-            
-            // Function to go to a specific slide
-            function goToSlide(index) {
-                currentIndex = index;
-                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-                
-                // Update indicators
-                indicators.forEach((indicator, i) => {
-                    indicator.classList.toggle('active', i === currentIndex);
-                });
-            }
-            
-            // Next slide
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % totalItems;
-                goToSlide(currentIndex);
-            });
-            
-            // Previous slide
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-                goToSlide(currentIndex);
-            });
-            
-            // Auto-play the carousel
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % totalItems;
-                goToSlide(currentIndex);
-            }, 5000);
-        });
-
         // Mobile dropdown toggle
         document.addEventListener('DOMContentLoaded', function() {
             const dropdownToggles = document.querySelectorAll('nav ul li.dropdown > a');
