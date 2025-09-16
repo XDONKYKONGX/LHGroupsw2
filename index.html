@@ -9,45 +9,51 @@
 </head>
 <body>
     <!-- Header & Navigation -->
-    <header>
-        <div class="container header-content">
-            <div class="contact-info">
-                <span><i class="fas fa-phone"></i> <a href="tel:07833906526">07833 906 526</a></span>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#">Divisions <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#building-maintenance">Building & Maintenance</a></li>
-                            <li><a href="Bespoke-joinery-and-Carpentry.html">Bespoke Joinery & Carpentry</a></li>
-                            <li><a href="#grp-pattern">GRP & Pattern Making</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#">Projects <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Torquay</a></li>
-                            <li><a href="#">Paignton</a></li>
-                            <li><a href="#">Brixham</a></li>
-                            <li><a href="#">Salcombe</a></li>
-                            <li><a href="#">Newton Abbot</a></li>
-                            <li><a href="#">Teignmouth</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
-            <div class="header-social">
-                <a href="https://www.facebook.com/profile.php?id=61575698164334" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/WebsitesPa62035" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.instagram.com/panda_websites_uk/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            </div>
+<header>
+    <div class="container header-content">
+        <div class="contact-info">
+            <span><i class="fas fa-phone"></i> <a href="tel:07833906526">07833 906 526</a></span>
         </div>
-    </header>
+        
+        <!-- Mobile menu button -->
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <nav id="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Divisions <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Building & Maintenance</a></li>
+                        <li><a href="Bespoke-joinery-and-Carpentry.html">Bespoke Joinery & Carpentry</a></li>
+                        <li><a href="#">GRP Specialists & Pattern Making Systems</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Projects <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Torquay</a></li>
+                        <li><a href="#">Paignton</a></li>
+                        <li><a href="#">Brixham</a></li>
+                        <li><a href="#">Salcombe</a></li>
+                        <li><a href="#">Newton Abbot</a></li>
+                        <li><a href="#">Teignmouth</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-social">
+            <a href="https://www.facebook.com/profile.php?id=61575698164334" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/WebsitesPa62035" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/panda_websites_uk/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </div>
+</header>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -225,31 +231,82 @@
         </div>
     </footer>
 
-    <script>
         // Mobile dropdown toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownToggles = document.querySelectorAll('nav ul li.dropdown > a');
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+        
+        // Mobile menu toggle
+        mobileMenuToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            this.classList.toggle('active');
             
-            dropdownToggles.forEach(toggle => {
-                toggle.addEventListener('click', function(e) {
-                    if (window.innerWidth <= 768) {
-                        e.preventDefault();
-                        const dropdown = this.parentElement;
-                        dropdown.classList.toggle('active');
-                    }
-                });
-            });
-            
-            // Close dropdowns when clicking elsewhere
-            document.addEventListener('click', function(e) {
-                if (window.innerWidth <= 768 && !e.target.closest('nav ul li.dropdown')) {
-                    document.querySelectorAll('nav ul li.dropdown').forEach(dropdown => {
-                        dropdown.classList.remove('active');
+            // Change icon based on menu state
+            const icon = this.querySelector('i');
+            if (mainNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Dropdown toggle for mobile
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const dropdown = this.parentElement;
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown').forEach(item => {
+                        if (item !== dropdown) {
+                            item.classList.remove('active');
+                        }
                     });
+                    
+                    // Toggle current dropdown
+                    dropdown.classList.toggle('active');
                 }
             });
         });
-    </script>
+        
+        // Close dropdowns when clicking elsewhere on mobile
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768 && 
+                !e.target.closest('nav') && 
+                !e.target.closest('.mobile-menu-toggle')) {
+                mainNav.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                
+                // Reset mobile menu icon
+                const icon = mobileMenuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                
+                // Close all dropdowns
+                document.querySelectorAll('.dropdown').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            }
+        });
+        
+        // Desktop dropdown behavior (unchanged)
+        if (window.innerWidth > 768) {
+            const desktopDropdownToggles = document.querySelectorAll('nav ul li.dropdown > a');
+            
+            desktopDropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    if (window.innerWidth > 768) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        }
+    });
+</script>
 </body>
 </html>
-
